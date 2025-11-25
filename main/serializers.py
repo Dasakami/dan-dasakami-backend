@@ -1,9 +1,6 @@
 from rest_framework import serializers
 from .models import Article, Project, ProjectCategory, ProjectImage, Skill, Tag, Contact
 
-# ----------------------
-# Статьи
-# ----------------------
 class ArticleSerializers(serializers.ModelSerializer):
     class Meta:
         model = Article
@@ -11,9 +8,6 @@ class ArticleSerializers(serializers.ModelSerializer):
         depth = 1  # чтобы теги подтягивались автоматически
 
 
-# ----------------------
-# Теги
-# ----------------------
 class TagSerializers(serializers.ModelSerializer):
     class Meta:
         model = Tag
