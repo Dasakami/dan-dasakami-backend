@@ -3,10 +3,19 @@ djangorestframework>=3.14.0
 django-cors-headers>=4.3.1
 drf-yasg>=1.21.7
 
+# JWT auth
+djangorestframework-simplejwt>=5.3.1
+
+# Cloudinary
 cloudinary>=1.36.0
 django-cloudinary-storage>=0.3.0
+
+# Postgres
 psycopg2-binary>=2.9.9
+
+# env
 python-dotenv>=1.0.1
 
+# Deploy
 gunicorn>=21.2.0
 whitenoise>=6.6.0
