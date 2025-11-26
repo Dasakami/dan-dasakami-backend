@@ -14,7 +14,6 @@ CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 INSTALLED_APPS = [
     'main',
     'cloudinary',
-    'django_ckeditor_5',
     'django.contrib.sitemaps',
     'cloudinary_storage',
     'django.contrib.admin',
