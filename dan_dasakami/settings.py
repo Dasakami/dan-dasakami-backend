@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "http://147.45.108.120:3000",
+    "http://147.45.108.120",
     "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]
