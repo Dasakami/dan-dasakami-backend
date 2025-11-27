@@ -1,41 +1,44 @@
-# version: 3.9
-
 services:
   web:
-    image: my_site_info
     build:
       context: .
+      dockerfile: Dockerfile
+    image: dan_dasakami:latest
+    container_name: dan_dasakami_web
     ports:
-      - '8001:8000'
-    container_name: my_site_info
-    depends_on:
-      db:
-        condition: service_healthy
+      - '8000:8000'
     env_file:
       - .env
     environment:
-      DJANGO_SETTINGS_MODULE: dan_dasakami.settings
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/dan_dasakami
-      SPRING_DATASOURCE_USERNAME: 'postgres'
-      SPRING_DATASOURCE_PASSWORD: 1908
-
-  db:
-    image: postgres:16.0
-    environment:
-      POSTGRES_PASSWORD: 1908
-      POSTGRES_USER: 'postgres'
-      POSTGRES_DB: 'dan_dasakami'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d dan_dasakami"]
-      interval: 1m30s
-      timeout: 30s
-      retries: 5
-      start_period: 30s
+      - DJANGO_SETTINGS_MODULE=dan_dasakami.settings
     volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - '5433:5432'
+      - ./db.sqlite3:/app/db.sqlite3  # Персистентность базы
+      - ./staticfiles:/app/staticfiles  # Статика
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/admin/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
+  # Если нужен Postgres (раскомментируй и настрой в settings.py):
+  # db:
+  #   image: postgres:16.0-alpine
+  #   container_name: dan_dasakami_db
+  #   environment:
+  #     POSTGRES_DB: dan_dasakami
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: 1908
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - '5432:5432'
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
-volumes:
-  db-data:
+# volumes:
+#   postgres_data:
