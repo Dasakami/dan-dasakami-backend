@@ -1,4 +1,3 @@
-#!/bin/sh
 echo "Waiting for postgres..."
 while ! pg_isready -h $DB_HOST -p 5432 -U $DB_USER; do
   sleep 1

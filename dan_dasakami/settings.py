@@ -58,8 +58,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dan_dasakami.wsgi.application'
-
-# База данных - для продакшена лучше Postgres, но SQLite быстрее для небольших проектов
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -67,7 +65,6 @@ DATABASES = {
     }
 }
 
-# Если хочешь использовать Postgres (раскомментируй):
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -94,7 +91,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# WhiteNoise настройки для быстрой раздачи статики
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -103,10 +99,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# ===============================
-# МЕДИА (только для загружаемых файлов)
-# ===============================
 MEDIA_URL = '/media/'
 
 CLOUDINARY_STORAGE = {
@@ -117,9 +109,6 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ===============================
-# EMAIL
-# ===============================
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
@@ -130,9 +119,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
-# ===============================
-# REST FRAMEWORK
-# ===============================
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -148,9 +134,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-# ===============================
-# CORS
-# ===============================
 CORS_ALLOWED_ORIGINS = [
     "http://147.45.108.120",
     "http://127.0.0.1:3000",
@@ -165,9 +148,6 @@ CORS_ALLOW_HEADERS = [
     'dnt', 'origin', 'user-agent', 'x-csrftoken', 'x-requested-with',
 ]
 
-# ===============================
-# БЕЗОПАСНОСТЬ (для продакшена)
-# ===============================
 if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
