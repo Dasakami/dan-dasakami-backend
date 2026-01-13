@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+SECRET_KEY = os.getenv('SECRET_KEY', default='secretik')
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'dan-dasakami-backend.onrender.com,owner.daskoro.site,localhost').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://dan-dasakami-backend.onrender.com,https://owner.daskoro.site').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,21 +19,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    
-    # Third party
     'rest_framework',
     'corsheaders',
     'drf_yasg',
     'cloudinary',
     'cloudinary_storage',
-    
-    # Local
     'main',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ВАЖНО: сразу после SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,10 +91,6 @@ LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Asia/Bishkek'
 USE_I18N = True
 USE_TZ = True
-
-# ===============================
-# СТАТИКА (ВАЖНО!)
-# ===============================
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -163,6 +155,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://147.45.108.120",
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    'https://dan-dasakami-backend.onrender.com',
+    'https://owner.daskoro.site'
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
