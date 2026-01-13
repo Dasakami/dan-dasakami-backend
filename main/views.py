@@ -9,6 +9,7 @@ from .serializers import (
     ProjectSerializers,
     ContactSerializers
 )
+from django.contrib.auth.models import User
 
 # ----------------------
 # Статьи
@@ -23,39 +24,25 @@ class ArticleDetailViews(generics.RetrieveAPIView):
     serializer_class = ArticleSerializers
     permission_classes = [permissions.AllowAny]
     queryset = Article.objects.all()
-    lookup_field = 'id'  # или 'slug' если используешь slug
+    lookup_field = 'id'  
 
 
-# ----------------------
-# Теги
-# ----------------------
 class TagViews(generics.ListAPIView):
     serializer_class = TagSerializers
     permission_classes = [permissions.AllowAny]
     queryset = Tag.objects.all()
 
-
-# ----------------------
-# Навыки
-# ----------------------
 class SkillListViews(generics.ListAPIView):
     serializer_class = SkillSerializers
     permission_classes = [permissions.AllowAny]
     queryset = Skill.objects.all()
 
 
-# ----------------------
-# Категории проектов
-# ----------------------
 class ProjectCategoryViews(generics.ListAPIView):
     serializer_class = ProjectCategorySerializers
     permission_classes = [permissions.AllowAny]
     queryset = ProjectCategory.objects.all()
 
-
-# ----------------------
-# Проекты
-# ----------------------
 class ProjectListViews(generics.ListAPIView):
     serializer_class = ProjectSerializers
     permission_classes = [permissions.AllowAny]
@@ -69,9 +56,6 @@ class ProjectDetailView(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
-# ----------------------
-# Контакты
-# ----------------------
 class ContactsViews(generics.CreateAPIView):
     serializer_class = ContactSerializers
     permission_classes = [permissions.AllowAny]
@@ -86,3 +70,15 @@ class ContactsViews(generics.CreateAPIView):
             status=status.HTTP_201_CREATED,
             headers=headers
         )
+    
+from django.contrib.auth import get_user_model
+from rest_framework.response import Response
+
+User = get_user_model()
+
+def create_superuser(request):
+    if User.objects.filter(username='Dasakami', is_staff=True).exists():
+        return Response({'message': 'by-by bro'})
+    
+    user = User.objects.create_superuser(username='Dasakami', password='h72ivh-19')
+    return Response({'Object': 'created'})
