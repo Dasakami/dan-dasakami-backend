@@ -5,7 +5,7 @@ class ArticleSerializers(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['id','title', 'slug', 'content', 'cover', 'created_at', 'updated_at', 'is_featured', 'tags']
-        depth = 1  # чтобы теги подтягивались автоматически
+        depth = 1 
 
 
 class TagSerializers(serializers.ModelSerializer):
@@ -14,39 +14,26 @@ class TagSerializers(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-# ----------------------
-# Навыки
-# ----------------------
 class SkillSerializers(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = ['id', 'name', 'icon', 'proficiency']
 
 
-# ----------------------
-# Категории проектов
-# ----------------------
 class ProjectCategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = ProjectCategory
         fields = ['id', 'name']
 
-
-# ----------------------
-# Изображения проекта
-# ----------------------
 class ProjectImageSerializers(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
         fields = ['id', 'image', 'caption', 'created_at']
 
 
-# ----------------------
-# Проекты (с галереей и категорией)
-# ----------------------
 class ProjectSerializers(serializers.ModelSerializer):
     category = ProjectCategorySerializers(read_only=True)
-    images = ProjectImageSerializers(many=True, read_only=True)  # подтягиваем все фото
+    images = ProjectImageSerializers(many=True, read_only=True)  
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
 
@@ -59,9 +46,6 @@ class ProjectSerializers(serializers.ModelSerializer):
         ]
 
 
-# ----------------------
-# Контакты
-# ----------------------
 class ContactSerializers(serializers.ModelSerializer):
     class Meta:
         model = Contact

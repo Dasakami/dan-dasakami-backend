@@ -37,7 +37,7 @@ class Contact(models.Model):
     message = models.TextField()
     contact_type = models.CharField(max_length=50, choices=TYPE_CHOICES, default='feedback')
     created_at = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)  # отмечаем прочитано или нет
+    is_read = models.BooleanField(default=False) 
 
     def __str__(self):
         return f'Сообщение от {self.name or "Аноним"}'
@@ -93,8 +93,8 @@ class ProjectImage(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    icon = models.ImageField(upload_to='skills/', blank=True, null=True, storage=MediaCloudinaryStorage())  # иконка технологии
-    proficiency = models.IntegerField(default=50)  # 0-100%, например
+    icon = models.ImageField(upload_to='skills/', blank=True, null=True, storage=MediaCloudinaryStorage()) 
+    proficiency = models.IntegerField(default=50)  
 
     def __str__(self):
         return self.name

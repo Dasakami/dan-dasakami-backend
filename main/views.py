@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from .models import Article, Tag, Skill, ProjectCategory, Project, Contact
+from .models import Article, Tag, Skill, ProjectCategory, Project
 from .serializers import (
     ArticleSerializers,
     TagSerializers,
@@ -11,9 +11,6 @@ from .serializers import (
 )
 from django.contrib.auth.models import User
 
-# ----------------------
-# Статьи
-# ----------------------
 class ArticleListViews(generics.ListAPIView):
     serializer_class = ArticleSerializers
     permission_classes = [permissions.AllowAny]
@@ -76,11 +73,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 def create_superuser(request):
-    # Проверка, что пользователь уже есть
     if User.objects.filter(username='Dasakami', is_staff=True).exists():
         return JsonResponse({'message': 'User already exists'})
-
-    # Создание суперюзера
     user = User.objects.create_superuser(username='Dasakami', password='h72ivh-19')
     
     return JsonResponse({'message': 'Superuser created'})

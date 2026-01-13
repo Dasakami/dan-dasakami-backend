@@ -7,12 +7,7 @@ __pycache__/
 db.sqlite3
 media/
 staticfiles/
-main/templates/main/yandex.html
 
 .vscode/
 .idea/
 *.swp
-templates/base.html
-main/templates/main/
-main/templates/404.html
-main/templates/500.html
