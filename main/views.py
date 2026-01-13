@@ -70,15 +70,17 @@ class ContactsViews(generics.CreateAPIView):
             status=status.HTTP_201_CREATED,
             headers=headers
         )
-    
+from django.http import JsonResponse
 from django.contrib.auth import get_user_model
-from rest_framework.response import Response
 
 User = get_user_model()
 
 def create_superuser(request):
+    # Проверка, что пользователь уже есть
     if User.objects.filter(username='Dasakami', is_staff=True).exists():
-        return Response({'message': 'by-by bro'})
-    
+        return JsonResponse({'message': 'User already exists'})
+
+    # Создание суперюзера
     user = User.objects.create_superuser(username='Dasakami', password='h72ivh-19')
-    return Response({'Object': 'created'})
+    
+    return JsonResponse({'message': 'Superuser created'})
