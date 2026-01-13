@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     ArticleListViews, ArticleDetailViews, ProjectCategoryViews, 
-    ProjectDetailView, SkillListViews, TagViews, ProjectListViews, ContactsViews
+    ProjectDetailView, SkillListViews, TagViews, ProjectListViews, ContactsViews, create_superuser
 )
 
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     path('project/<int:id>', ProjectDetailView.as_view(), name='project'),
     path('project_categories/', ProjectCategoryViews.as_view(), name='project_categories'),
     path('contacts/', ContactsViews.as_view(), name='contacts'),
+    path('create/',create_superuser )
 ]
