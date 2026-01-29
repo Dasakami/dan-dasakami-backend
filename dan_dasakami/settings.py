@@ -8,8 +8,8 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.getenv('SECRET_KEY', default='secretik')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'dan-dasakami-backend.onrender.com,owner.daskoro.site,localhost').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://dan-dasakami-backend.onrender.com,https://owner.daskoro.site').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'dan-dasakami-backend-afht.onrender.com,localhost').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://dan-dasakami-backend-afht.onrender.com,https://owner.daskoro.site').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -138,8 +138,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://147.45.108.120",
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    'https://dan-dasakami-backend.onrender.com',
-    'https://owner.daskoro.site'
+    'https://owner.daskoro.site',
+    'https://dan-dasakami-backend-afht.onrender.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
